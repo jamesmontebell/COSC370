@@ -4,7 +4,7 @@ import sys  # In order to terminate the program
 
 serverPort = 12000
 serverSocket = socket(AF_INET, SOCK_STREAM)
-serverSocket.bind(('',serverPort))
+serverSocket.bind(('', serverPort))
 serverSocket.listen(1)
 
 # Server should be up and running and listening to the incoming connections
@@ -43,7 +43,7 @@ while True:
 
         error = "HTTP /1.1 404 Not Found\r\n\r\n"
         connectionSocket.send(error.encode())
-        
+
         e = open("/error.html")
         outputError = e.read()
         for i in range(0, len(outputError)):
@@ -53,4 +53,3 @@ while True:
 
     connectionSocket.close()
     sys.exit()  # Terminate the program after sending the corresponding data
-
