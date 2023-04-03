@@ -31,25 +31,21 @@ while True:
         Fill in code to send the the HTTP response header line
         ("HTTP /1.1 200 OK\r\n\r\n") to the connection socket.
         """
-        response = "HTTP /1.1 200 OK\r\n\r\n"
-        connectionSocket.send(response.encode())
+    
+        connectionSocket.send("HTTP /1.1 200 OK\r\n\r\n".encode())
         # Send the content of the requested file to the client
         # Assuming connectionSocket has been created above
         for i in range(0, len(outputdata)):
-            connectionSocket.send(outputdata[i]. encode())
+            connectionSocket.send(outputdata[i].encode())
         connectionSocket.send("\r\n". encode())
         connectionSocket.close()
+        
     except IOError:
 
-        error = "HTTP /1.1 404 Not Found\r\n\r\n"
-        connectionSocket.send(error.encode())
+        connectionSocket.send("HTTP/1.1 404 Not found\r\n\r\n".encode())
+        connectionSocket.send("<html><head></head><body><h1>404 Not found</h1></body></html>\r\n".encode())
 
-        e = open("/error.html")
-        outputError = e.read()
-        for i in range(0, len(outputError)):
-            connectionSocket.send(outputError[i]. encode())
-        connectionSocket.send("\r\n". encode())
         connectionSocket.close()
-
+        
     connectionSocket.close()
     sys.exit()  # Terminate the program after sending the corresponding data
